@@ -23,7 +23,7 @@ print(df.dtypes)
 print(df.ix[0])
 
 # Check the number of data points with NaN, if any
-print('# of NaN:' len(df.isnull()))
+print('# of NaN:', len(df.isnull()))
 
 # Specify the target variable and the features
 target = df.iloc[:, 0].name
@@ -56,7 +56,7 @@ print(y.shape)
 print(theta.shape)
 
 
-# Compute Cost Function
+# Compute Cost function
 def computecost(X, y, theta):
     H = X @ theta.T
     J = np.power((H - y), 2)
@@ -65,3 +65,34 @@ def computecost(X, y, theta):
 
 
 print(computecost(X, y, theta))
+
+# Set iterations and alpha (learning rate)
+alpha = 0.01
+iterations = 500
+
+
+# Gradient Descent function
+def gradientdescent(X, y, theta, iterations, alpha):
+    cost = np.zeros(iterations)
+    for i in range(iterations):
+        H = X @ theta.T
+        theta = theta - (alpha/len(X)) * np.sum(X * (H - y), axis=0)
+        cost[i] = computecost(X, y, theta)
+    return theta, cost
+
+
+# Do Gradient Descent and print final theta
+final_theta, cost = gradientdescent(X, y, theta, iterations, alpha)
+print(final_theta)
+
+# Compute and print final cost
+final_cost = computecost(X, y, final_theta)
+print(final_cost)
+
+# Plot Iterations vs. Cost
+fig, ax = plt.subplots()
+ax.plot(np.arange(iterations), cost, 'r')
+ax.set_xlabel('Iterations')
+ax.set_ylabel('Cost')
+ax.set_title('Iterations vs. Cost')
+plt.show()
