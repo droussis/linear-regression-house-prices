@@ -36,7 +36,7 @@ df = df.drop(['sqft_lot', 'condition', 'yr_built', 'zipcode', 'long',
              'sqft_lot15'], axis=1)
 features = df.iloc[:, 1:].columns.tolist()
 
-# Check updated features and store length
+# Check updated features and store length and targets
 print(features)
 len_of_features = len(features)
 
@@ -50,10 +50,13 @@ X = np.concatenate((ones, X), axis=1)
 y = df.iloc[:, 0:1].values
 theta = np.zeros([1, len_of_features + 1])
 
+# Store targets
+targets = y
+
 # Check the size of the matrices
-print(X.shape)
-print(y.shape)
-print(theta.shape)
+print("Dimensions of X:", X.shape)
+print("Dimensions of y:", y.shape)
+print("Dimensions of theta:", theta.shape)
 
 
 # Compute Cost function
@@ -96,3 +99,14 @@ ax.set_xlabel('Iterations')
 ax.set_ylabel('Cost')
 ax.set_title('Iterations vs. Cost')
 plt.show()
+
+
+# Root Mean Squared Error function
+def rmse(targets, final_theta):
+    predictions = X @ final_theta.T
+    return np.sqrt(((predictions[:, 0] - targets[:, 0]) ** 2).mean())
+
+
+# Compute and print Root Mean Squared Error
+rmse_val = rmse(targets, final_theta)
+print("Root Mean Squared Erros is:", rmse_val)
