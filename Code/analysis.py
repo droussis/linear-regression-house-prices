@@ -86,11 +86,11 @@ def gradientdescent(X, y, theta, iterations, alpha):
 
 # Do Gradient Descent and print final theta
 final_theta, cost = gradientdescent(X, y, theta, iterations, alpha)
-print(final_theta)
+print("Final theta is:", final_theta)
 
 # Compute and print final cost
 final_cost = computecost(X, y, final_theta)
-print(final_cost)
+print("Final cost is:", final_cost)
 
 # Plot Iterations vs. Cost
 fig, ax = plt.subplots()
@@ -109,4 +109,4 @@ def rmse(targets, final_theta):
 
 # Compute and print Root Mean Squared Error
 rmse_val = rmse(targets, final_theta)
-print("Root Mean Squared Erros is:", rmse_val)
+print("Root Mean Squared Error is:", rmse_val)
