@@ -29,7 +29,7 @@ print('# of NaN:', len(df.isnull()))
 target = df.iloc[:, 0].name
 features = df.iloc[:, 1:].columns.tolist()
 print(features)
-print(df.corr().ix[:, 0])
+print(df.corr().iloc[:, 0])
 
 # Remove features with correlation < 0.1 and update features
 df = df.drop(['sqft_lot', 'condition', 'yr_built', 'zipcode', 'long',
